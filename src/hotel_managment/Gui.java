@@ -46,6 +46,7 @@ public class Gui extends JFrame {
 	
 	//主类的构造函数（初始化界面）
 	public Gui() {
+		setTitle("Hotel Management");
 		setBackground(new Color(51, 204, 204));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 726, 497);
