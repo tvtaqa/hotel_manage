@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -12,8 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 
  
  //主类
@@ -22,6 +26,7 @@ public class Gui extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	public JButton btnNewButton;
+	public JTable table;
 	Signinlistener listener;//ActionListener的子接口（Signinlistener）的listener对象
 
 	
@@ -37,7 +42,6 @@ public class Gui extends JFrame {
 				}
 			}
 		});
-
 	}
 
 	/**
@@ -49,51 +53,56 @@ public class Gui extends JFrame {
 		setTitle("Hotel Management");
 		setBackground(new Color(51, 204, 204));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 726, 497);
-		contentPane = new JPanel();
+		setBounds(100, 100, 897, 589);
+		contentPane = new JPanel(){
+            
+           private static final long serialVersionUID = 1L;
+
+           @Override
+           protected void paintComponent(Graphics g) {
+        	   super.paintComponent(g);
+        	   ImageIcon icon = new ImageIcon("E:\\1.jpg");
+        	   g.drawImage(icon.getImage(), 0, 0, null);
+        	   }  
+       };
 		contentPane.setBackground(new Color(0, 204, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblUser = new JLabel("user:");
-		lblUser.setBounds(216, 185, 72, 18);
+		lblUser.setBounds(337, 185, 72, 18);
 		contentPane.add(lblUser);
 		textField = new JTextField();
-		textField.setBounds(298, 182, 138, 24);
+		textField.setBounds(403, 182, 138, 24);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("password:");
-		lblPassword.setBounds(216, 235, 72, 18);
+		lblPassword.setBounds(317, 245, 72, 18);
 		contentPane.add(lblPassword);
 		
 		 btnNewButton = new JButton("sign in");
-		btnNewButton.setBounds(298, 286, 113, 27);
+		btnNewButton.setBounds(403, 309, 113, 27);
 		contentPane.add(btnNewButton);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(298, 232, 138, 24);
+		passwordField.setBounds(403, 242, 138, 24);
 		contentPane.add(passwordField);
 		
-		JLabel label = new JLabel("\u9152\u5E97\u7BA1\u7406\u7CFB\u7EDF");
-		label.setForeground(Color.DARK_GRAY);
-		label.setFont(new Font("宋体", Font.PLAIN, 30));
-		label.setBounds(273, 84, 256, 88);
-		contentPane.add(label);
-		
-		
+		JLabel lblHotelManagementSystem = new JLabel("Hotel Management System");
+		lblHotelManagementSystem.setForeground(Color.DARK_GRAY);
+		lblHotelManagementSystem.setFont(new Font("宋体", Font.PLAIN, 30));
+		lblHotelManagementSystem.setBounds(283, 28, 371, 118);
+		contentPane.add(lblHotelManagementSystem);	
 	}
 	//注册监听器的方法
 	void setSignListener()
 		{
-			/*
-			 * 匿名类
-			 */
-			Signinlistener listener = new Signinlistener()
+			Signinlistener listener = new Signinlistener()        //匿名类
 			{
-				final String user1="1551426";//正确的用户名
-				final String password1="123";//正确的密码
+				final String user1="1551426";                     //正确的用户名
+				final String password1="123";                     //正确的密码
 				JTextField user;
 				JPasswordField  password;
 				
@@ -116,6 +125,7 @@ public class Gui extends JFrame {
 						{
 							System.out.println("成功登录");
 							contentPane.removeAll();
+							secondact();
 							contentPane.repaint();  
 						}
 						
@@ -137,7 +147,60 @@ public class Gui extends JFrame {
 			listener.setUserField(textField);
 			listener.setPasswordField(passwordField);
 			btnNewButton.addActionListener(listener);
+			passwordField.addActionListener(listener);
 		}
 	
+	void secondact()
+	{
+		JButton button = new JButton("\u767B\u8BB0\u5165\u4F4F");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(514, 13, 100, 30);
+		contentPane.add(button);
+		
+		JButton btnNewButton = new JButton("\u9000\u623F\u529E\u7406");
+		btnNewButton.setBounds(753, 13, 100, 30);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("\u67E5\u8BE2");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(266, 13, 100, 30);
+		contentPane.add(btnNewButton_1);
+		
+		textField = new JTextField();
+		textField.setBounds(91, 10, 161, 36);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblCheckOut = new JLabel("check in:");
+		lblCheckOut.setBounds(409, 16, 91, 24);
+		contentPane.add(lblCheckOut);
+		
+		JLabel lblNewLabel = new JLabel("check out:");
+		lblNewLabel.setBounds(648, 10, 91, 36);
+		contentPane.add(lblNewLabel);
+		
+		table = new JTable();
+		table.setBounds(90, 84, 747, 447);
+		contentPane.add(table);
+		
+		JLabel label = new JLabel("\u6240\u6709\u4FE1\u606F\uFF1A");
+		label.setBounds(4, 84, 83, 24);
+		contentPane.add(label);
+		
+		JLabel label_1 = new JLabel("\u8EAB\u4EFD\u8BC1\u53F7\uFF1A");
+		label_1.setBounds(4, 13, 83, 30);
+		contentPane.add(label_1);
+		
+		
+		
+	}
 }
+
+
 
